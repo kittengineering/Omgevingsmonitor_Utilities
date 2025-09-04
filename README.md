@@ -7,4 +7,4 @@ voor meer informatie.
 # Configurator
 
 Dit is het programma om de Omgevingsmonitor te configureren.
-Voor de sources, zie [Configurator_Sources](Configurator_Sources].
+Voor de sources, zie [Configurator_Sources](Configurator_Sources).
