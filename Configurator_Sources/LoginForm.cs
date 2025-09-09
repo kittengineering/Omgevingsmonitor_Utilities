@@ -36,12 +36,14 @@ namespace Omgevingsmonitor_configurator
         public LoginForm()
         {
             InitializeComponent();
+            this.AcceptButton = loginBtn;
+            loginBtn.Enabled = true;
         }
 
         private async void loginBtn_Click(object sender, EventArgs e)
         {
             OpenSenseMapApiClient client = new OpenSenseMapApiClient();
-
+            loginBtn.Enabled = false;
             try
             {
                 (var result, UserInfo userInfo) = await client.SignInAsync(emailTextBox.Text, passwordTextBox.Text);
@@ -54,11 +56,13 @@ namespace Omgevingsmonitor_configurator
                 else
                 {
                     MessageBox.Show("Email or password incorrect", "Incorrect details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    loginBtn.Enabled = true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Unexpected error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                loginBtn.Enabled = true;
             }
         }
     }

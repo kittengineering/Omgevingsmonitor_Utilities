@@ -455,11 +455,11 @@ namespace Omgevingsmonitor_configurator
 
             var response = await _httpClient.PostAsync(endpoint, httpContent);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                var responseBody = await response.Content.ReadAsStringAsync();
-                throw new OpenSenseMapApiException(response.StatusCode, response.ReasonPhrase, responseBody);
-            }
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    var responseBody = await response.Content.ReadAsStringAsync();
+            //    throw new OpenSenseMapApiException(response.StatusCode, response.ReasonPhrase, responseBody);
+            //}
 
             return response;
         }

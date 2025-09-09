@@ -47,13 +47,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.heightBox = new System.Windows.Forms.TextBox();
             this.sensirionCheckBox = new System.Windows.Forms.CheckBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.PM25Button = new System.Windows.Forms.RadioButton();
-            this.PM10Button = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.sen50Select = new System.Windows.Forms.RadioButton();
+            this.sen55Select = new System.Windows.Forms.RadioButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.sensorGridView)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // locatieControl
@@ -70,7 +67,7 @@
             this.locatieControl.Location = new System.Drawing.Point(388, 12);
             this.locatieControl.MarkersEnabled = true;
             this.locatieControl.MaxZoom = 2;
-            this.locatieControl.MinZoom = 2;
+            this.locatieControl.MinZoom = -10;
             this.locatieControl.MouseWheelZoomEnabled = true;
             this.locatieControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
             this.locatieControl.Name = "locatieControl";
@@ -82,8 +79,8 @@
             this.locatieControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.locatieControl.ShowTileGridLines = false;
             this.locatieControl.Size = new System.Drawing.Size(544, 570);
-            this.locatieControl.TabIndex = 8;
-            this.locatieControl.Zoom = 0D;
+            this.locatieControl.TabIndex = 3;
+            this.locatieControl.Zoom = -4D;
             this.locatieControl.OnPositionChanged += new GMap.NET.PositionChanged(this.locatieControl_OnPositionChanged);
             // 
             // label1
@@ -91,7 +88,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 16);
+            this.label1.Size = new System.Drawing.Size(49, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "Name:";
             // 
@@ -100,7 +97,7 @@
             this.nameBox.Location = new System.Drawing.Point(118, 12);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(264, 22);
-            this.nameBox.TabIndex = 10;
+            this.nameBox.TabIndex = 1;
             // 
             // latitudeBox
             // 
@@ -120,14 +117,14 @@
             this.exposureBox.Location = new System.Drawing.Point(118, 41);
             this.exposureBox.Name = "exposureBox";
             this.exposureBox.Size = new System.Drawing.Size(264, 24);
-            this.exposureBox.TabIndex = 12;
+            this.exposureBox.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 16);
+            this.label2.Size = new System.Drawing.Size(71, 17);
             this.label2.TabIndex = 13;
             this.label2.Text = "Exposure:";
             // 
@@ -144,7 +141,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 16);
+            this.label3.Size = new System.Drawing.Size(63, 17);
             this.label3.TabIndex = 15;
             this.label3.Text = "Latitude:";
             // 
@@ -153,7 +150,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 104);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 16);
+            this.label4.Size = new System.Drawing.Size(78, 17);
             this.label4.TabIndex = 16;
             this.label4.Text = "Longlitude:";
             // 
@@ -182,7 +179,7 @@
             this.enableCol.MinimumWidth = 6;
             this.enableCol.Name = "enableCol";
             this.enableCol.ReadOnly = true;
-            this.enableCol.Width = 64;
+            this.enableCol.Width = 66;
             // 
             // functionsCol
             // 
@@ -199,7 +196,7 @@
             this.submitBtn.Location = new System.Drawing.Point(528, 588);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(404, 66);
-            this.submitBtn.TabIndex = 18;
+            this.submitBtn.TabIndex = 9;
             this.submitBtn.Text = "Submit";
             this.submitBtn.UseVisualStyleBackColor = true;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
@@ -210,16 +207,17 @@
             this.cancelBtn.Location = new System.Drawing.Point(118, 588);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(404, 66);
-            this.cancelBtn.TabIndex = 19;
+            this.cancelBtn.TabIndex = 10;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click_1);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(13, 160);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 16);
+            this.label5.Size = new System.Drawing.Size(64, 17);
             this.label5.TabIndex = 20;
             this.label5.Text = "Sensors:";
             // 
@@ -228,7 +226,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(13, 132);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 16);
+            this.label6.Size = new System.Drawing.Size(53, 17);
             this.label6.TabIndex = 22;
             this.label6.Text = "Height:";
             // 
@@ -237,7 +235,7 @@
             this.heightBox.Location = new System.Drawing.Point(118, 127);
             this.heightBox.Name = "heightBox";
             this.heightBox.Size = new System.Drawing.Size(264, 22);
-            this.heightBox.TabIndex = 21;
+            this.heightBox.TabIndex = 4;
             this.heightBox.Text = "1.0";
             // 
             // sensirionCheckBox
@@ -245,76 +243,59 @@
             this.sensirionCheckBox.AutoSize = true;
             this.sensirionCheckBox.Location = new System.Drawing.Point(118, 187);
             this.sensirionCheckBox.Name = "sensirionCheckBox";
-            this.sensirionCheckBox.Size = new System.Drawing.Size(169, 20);
-            this.sensirionCheckBox.TabIndex = 24;
+            this.sensirionCheckBox.Size = new System.Drawing.Size(177, 21);
+            this.sensirionCheckBox.TabIndex = 6;
             this.sensirionCheckBox.Text = "Added Sensirion Sen5x";
             this.sensirionCheckBox.UseVisualStyleBackColor = true;
             this.sensirionCheckBox.CheckedChanged += new System.EventHandler(this.sensirionCheckBox_CheckedChanged);
             // 
-            // radioButton1
+            // sen50Select
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(139, 214);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(167, 20);
-            this.radioButton1.TabIndex = 25;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Sensirion Sen50/Sen54";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.sen50Select.AutoSize = true;
+            this.sen50Select.Checked = true;
+            this.sen50Select.Enabled = false;
+            this.sen50Select.Location = new System.Drawing.Point(139, 214);
+            this.sen50Select.Name = "sen50Select";
+            this.sen50Select.Size = new System.Drawing.Size(178, 21);
+            this.sen50Select.TabIndex = 7;
+            this.sen50Select.TabStop = true;
+            this.sen50Select.Text = "Sensirion Sen50/Sen54";
+            this.sen50Select.UseVisualStyleBackColor = true;
+            this.sen50Select.CheckedChanged += new System.EventHandler(this.sen50Select_CheckedChanged);
             // 
-            // radioButton2
+            // sen55Select
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(139, 241);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(125, 20);
-            this.radioButton2.TabIndex = 26;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Sensirion Sen55";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.sen55Select.AutoSize = true;
+            this.sen55Select.Enabled = false;
+            this.sen55Select.Location = new System.Drawing.Point(139, 241);
+            this.sen55Select.Name = "sen55Select";
+            this.sen55Select.Size = new System.Drawing.Size(133, 21);
+            this.sen55Select.TabIndex = 8;
+            this.sen55Select.Text = "Sensirion Sen55";
+            this.sen55Select.UseVisualStyleBackColor = true;
+            this.sen55Select.CheckedChanged += new System.EventHandler(this.sen55Select_CheckedChanged);
             // 
-            // PM25Button
+            // checkBox1
             // 
-            this.PM25Button.AutoSize = true;
-            this.PM25Button.Location = new System.Drawing.Point(161, 10);
-            this.PM25Button.Name = "PM25Button";
-            this.PM25Button.Size = new System.Drawing.Size(65, 20);
-            this.PM25Button.TabIndex = 27;
-            this.PM25Button.TabStop = true;
-            this.PM25Button.Text = "PM2.5";
-            this.PM25Button.UseVisualStyleBackColor = true;
-            this.PM25Button.CheckedChanged += new System.EventHandler(this.PM25Button_CheckedChanged);
-            // 
-            // PM10Button
-            // 
-            this.PM10Button.AutoSize = true;
-            this.PM10Button.Location = new System.Drawing.Point(21, 10);
-            this.PM10Button.Name = "PM10Button";
-            this.PM10Button.Size = new System.Drawing.Size(65, 20);
-            this.PM10Button.TabIndex = 28;
-            this.PM10Button.TabStop = true;
-            this.PM10Button.Text = "PM 10";
-            this.PM10Button.UseVisualStyleBackColor = true;
-            this.PM10Button.CheckedChanged += new System.EventHandler(this.PM10Button_CheckedChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.PM10Button);
-            this.groupBox1.Controls.Add(this.PM25Button);
-            this.groupBox1.Location = new System.Drawing.Point(118, 155);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(232, 30);
-            this.groupBox1.TabIndex = 29;
-            this.groupBox1.TabStop = false;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(118, 159);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(75, 21);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Default";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // AddSenseBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 664);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.sen55Select);
+            this.Controls.Add(this.sen50Select);
             this.Controls.Add(this.sensirionCheckBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.heightBox);
@@ -333,10 +314,8 @@
             this.Controls.Add(this.locatieControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddSenseBoxForm";
-            this.Text = "AddSenseBoxForm";
+            this.Text = "AddSenseBox";
             ((System.ComponentModel.ISupportInitialize)(this.sensorGridView)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,10 +341,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn enableCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn functionsCol;
         private System.Windows.Forms.CheckBox sensirionCheckBox;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton PM25Button;
-        private System.Windows.Forms.RadioButton PM10Button;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton sen50Select;
+        private System.Windows.Forms.RadioButton sen55Select;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Management;
+using System.Text.RegularExpressions;
 using static Omgevingsmonitor_configurator.LoginForm;
 
 namespace Omgevingsmonitor_configurator
@@ -47,6 +49,25 @@ namespace Omgevingsmonitor_configurator
             threads = new Threads(this);
             StmProgrammer = new STM_Programmer(this);
             general = new General(this);
+
+            if (!STM_Programmer.checkStm32Install())
+            {
+                groupBox2.Visible = false;
+                labelBlockedReason.Visible = true;
+                labelBlockedReason.Text =
+                    $"De STM32 programmeerfunctie is uitgeschakeld.\r\n" +
+                    $"Er is een niet correcte versie of geen installatie van\r\n" +
+                    $"STM32CubeProgrammer gevonden.\r\n\r\n" +
+                    $"Vereist: STM32CubeProgrammer 2.17.0 of 2.18.0\r\n" +
+                    $"Installeer, update STM32CubeProgrammer of \r\n" +
+                    $"controlleer de omgevingsvariabele %STM32_PROGRAMMER%\r\n" +
+                    $"en probeer opnieuw.";
+            }
+            else
+            {
+                groupBox2.Visible = true;
+                labelBlockedReason.Visible = false;
+            }
         }
 
         public void UpdateProgressBar(ToolStripProgressBar pb, int value)
@@ -312,41 +333,55 @@ namespace Omgevingsmonitor_configurator
 
         private void configPortBox_DropDown(object sender, EventArgs e)
         {
-            string[] ports = SerialPort.GetPortNames();
+            //string[] ports = SerialPort.GetPortNames();
             configPortBox.Items.Clear();
-            foreach (string port in ports)
+            //foreach (string port in ports)
+            //{
+            //    configPortBox.Items.Add(port);
+            //}
+
+            using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%(COM%'"))
             {
-                configPortBox.Items.Add(port);
+                foreach (var obj in searcher.Get())
+                {
+                    string name = obj["Name"]?.ToString(); // bijv. "USB-SERIAL CH340 (COM3)"
+                    configPortBox.Items.Add(name);
+                }
             }
+
         }
 
         private void configPortBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            configPort.PortName = configPortBox.Text;
-            configPort.BaudRate = 115200; // Convert.ToInt32(configBaudBox.Text);
-            configPort.Open();
-
-            SerialConfigPortOpen = true;
-
-            Thread serialReceive = new Thread(threads.rxSerialThread);
-            serialReceive.Name = "ReceiveData";
-            serialReceive.Start();
-
-            Thread serialTransmit = new Thread(threads.txSerialThread);
-            serialTransmit.Name = "TransmitData";
-            serialTransmit.Start();
-
-            Thread handleReceived = new Thread(threads.rxHandlingThread);
-            handleReceived.Name = "HandleRxData";
-            handleReceived.Start();
-
-            configPortBox.BackColor = Color.Green;
-            if (LoggedIn)
+            var match = Regex.Match(configPortBox.Text, @"(COM\d+)");
+            if (match.Success)
             {
-                configBtn.Enabled = true;
-                configBtn.BackColor = Color.White;
-                deleteConfigBtn.Enabled = true;
-                deleteConfigBtn.BackColor = Color.White;
+                configPort.PortName = match.Value; // configPortBox.Text;
+                configPort.BaudRate = 115200; // Convert.ToInt32(configBaudBox.Text);
+                configPort.Open();
+
+                SerialConfigPortOpen = true;
+
+                Thread serialReceive = new Thread(threads.rxSerialThread);
+                serialReceive.Name = "ReceiveData";
+                serialReceive.Start();
+
+                Thread serialTransmit = new Thread(threads.txSerialThread);
+                serialTransmit.Name = "TransmitData";
+                serialTransmit.Start();
+
+                Thread handleReceived = new Thread(threads.rxHandlingThread);
+                handleReceived.Name = "HandleRxData";
+                handleReceived.Start();
+
+                configPortBox.BackColor = Color.Green;
+                if (LoggedIn)
+                {
+                    configBtn.Enabled = true;
+                    configBtn.BackColor = Color.White;
+                    deleteConfigBtn.Enabled = true;
+                    deleteConfigBtn.BackColor = Color.White;
+                }
             }
 
 
@@ -430,6 +465,74 @@ namespace Omgevingsmonitor_configurator
                 MessageBox.Show("Please select the correct COM port", "Communication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void openStmElfBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openProgramDialog = new OpenFileDialog();
+            openProgramDialog.Filter = "ELF(*.elf;*.ELF)|*.elf;*.ELF";
+            if (openProgramDialog.ShowDialog() == DialogResult.OK)
+            {
+                StmFilePath = openProgramDialog.FileName;
+                //Properties.Settings.Default.StmFilePath = openProgramDialog.FileName;
+                selectFileStmBox.Text = Path.GetFileName(StmFilePath);
+                //Properties.Settings.Default.Save();
+            }
+        }
+
+        private void stmDeviceBox_DropDown(object sender, EventArgs e)
+        {
+            stmDeviceBox.Items.Clear();
+
+            STM_Programmer programmer = new STM_Programmer(this);
+            List<StmDevice> devices = STM_Programmer.getStmDevices(stmInterfaceBox.Text);
+
+            foreach (StmDevice device in devices)
+            {
+                if (stmInterfaceBox.Text == "USB (DFU)")
+                {
+                    stmDeviceBox.Items.Add(device.DeviceIndex);
+                }
+                else if (stmInterfaceBox.Text == "ST-Link")
+                {
+                    stmDeviceBox.Items.Add(device.SN);
+                }
+            }
+        }
+
+        private void stmFlashBtn_Click(object sender, EventArgs e)
+        {
+            if (selectFileStmBox.Text != "")
+            {
+                List<StmDevice> devices = STM_Programmer.getStmDevices(stmInterfaceBox.Text);
+                StmDevice device = null;
+                if (stmInterfaceBox.Text == "USB (DFU)")
+                {
+                    device = devices.FirstOrDefault(dev => dev.DeviceIndex == stmDeviceBox.Text);
+                    if (device != null)
+                    {
+                        Thread stmProgramThread = new Thread(() =>
+                        {
+                            STM_Programmer.flashStm32ProgressBar(StmFilePath, "", device.DeviceIndex, device.SN, generalProgressBar, outputBox);
+                        });
+                        stmProgramThread.Name = "Flashing STM on:" + device;
+                        stmProgramThread.Start();
+                    }
+                }
+                else if (stmInterfaceBox.Text == "ST-Link")
+                {
+                    device = devices.FirstOrDefault(dev => dev.SN == stmDeviceBox.Text);
+                    if (device != null)
+                    {
+                        Thread stmProgramThread = new Thread(() =>
+                        {
+                            STM_Programmer.flashStm32ProgressBar(StmFilePath, "", "swd", device.SN, generalProgressBar, outputBox);
+                        });
+                        stmProgramThread.Name = "Flashing STM on:" + device;
+                        stmProgramThread.Start();
+                    }
+                }
+            }
         }
     }
 }

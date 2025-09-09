@@ -49,6 +49,25 @@ namespace Omgevingsmonitor_configurator
             return -1;
         }
 
+        public static string NormalizeConsoleGlyphs(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return s;
+
+            // Meest voorkomende: CP850/437 0xDB → Unicode full block
+            s = s.Replace('\u00DB', '\u2588'); // Û → █
+
+            // (optioneel) Nog wat klassiekers:
+            // CP437 176/177/178 (▒) varianten → Unicode shades
+            s = s.Replace('\u00B0', '\u2591'); // ¬/° issues komen soms voor, maar vaak 176 = light shade
+            s = s.Replace('\u00B1', '\u2592'); // ± → ▒ (medium shade) (afhankelijk van tool)
+            s = s.Replace('\u00B2', '\u2593'); // ² → ▓ (dark shade)
+
+            // Box-drawing fallback (soms verkeerd gedecodeerd als accenten):
+            s = s.Replace('├', '├').Replace('─', '─').Replace('│', '│'); // no-op als ze al kloppen
+
+            return s;
+        }
+
         public static bool messageBoxLed()
         {
             //foreach (StmDevices probe in gui.probes)

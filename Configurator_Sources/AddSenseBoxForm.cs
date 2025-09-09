@@ -38,7 +38,7 @@ namespace Omgevingsmonitor_configurator
             locatieControl.Position = new PointLatLng(0, 0);//(52.2167510750697, 6.84519588947296);
             locatieControl.MinZoom = 2;
             locatieControl.MaxZoom = 18;
-            locatieControl.Zoom = 10;
+            locatieControl.Zoom = 2;
             locatieControl.CanDragMap = true;
 
             exposureBox.SelectedIndex = 0;
@@ -121,14 +121,14 @@ namespace Omgevingsmonitor_configurator
                 icon = SensorIcon.cloud
             };
 
-            sensorGridView.Rows.Add(false, "PM10");
-            sensorGridView.Rows[sensorGridView.Rows.Count - 1].Tag = new OpenSenseMapApiClient.SenseBoxCreateRequest.Sensor
-            {
-                title = "PM10",
-                unit = "ppm",
-                sensorType = "PM",
-                icon = SensorIcon.cloud
-            };
+            //sensorGridView.Rows.Add(false, "PM10");
+            //sensorGridView.Rows[sensorGridView.Rows.Count - 1].Tag = new OpenSenseMapApiClient.SenseBoxCreateRequest.Sensor
+            //{
+            //    title = "PM10",
+            //    unit = "ppm",
+            //    sensorType = "PM",
+            //    icon = SensorIcon.cloud
+            //};
 
             sensorGridView.Rows.Add(false, "NOx");
             sensorGridView.Rows[sensorGridView.Rows.Count - 1].Tag = new OpenSenseMapApiClient.SenseBoxCreateRequest.Sensor
@@ -212,29 +212,45 @@ namespace Omgevingsmonitor_configurator
 
         private void sensirionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-             sensorGridView.Rows[7].Cells[0].Value = PM10Button.Checked && sensirionCheckBox.Checked;
-             sensorGridView.Rows[6].Cells[0].Value = PM25Button.Checked && sensirionCheckBox.Checked;
-             sensorGridView.Rows[8].Cells[0].Value = sensirionCheckBox.Checked;
+            sen50Select.Enabled = sensirionCheckBox.Checked;
+            sen55Select.Enabled = sensirionCheckBox.Checked;
+            sensorGridView.Rows[6].Cells[0].Value = sensirionCheckBox.Checked;
+            sensorGridView.Rows[7].Cells[0].Value = sen55Select.Checked && sensirionCheckBox.Checked;
         }
 
-        private void PM10Button_CheckedChanged(object sender, EventArgs e)
+        private void sen50Select_CheckedChanged(object sender, EventArgs e)
         {
-            if (sensirionCheckBox.Checked)
-            {
-                sensorGridView.Rows[7].Cells[0].Value = PM10Button.Checked;
-                sensorGridView.Rows[6].Cells[0].Value = PM25Button.Checked;
-            }
-
+            sensorGridView.Rows[7].Cells[0].Value = sen55Select.Checked && sensirionCheckBox.Checked;
         }
 
-        private void PM25Button_CheckedChanged(object sender, EventArgs e)
+        private void sen55Select_CheckedChanged(object sender, EventArgs e)
         {
-            if (sensirionCheckBox.Checked)
-            {
-                sensorGridView.Rows[7].Cells[0].Value = PM10Button.Checked;
-                sensorGridView.Rows[6].Cells[0].Value = PM25Button.Checked;
-            }
+            sensorGridView.Rows[7].Cells[0].Value = sen55Select.Checked && sensirionCheckBox.Checked;
         }
+
+        private void cancelBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        //private void PM10Button_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (sensirionCheckBox.Checked)
+        //    {
+        //        sensorGridView.Rows[7].Cells[0].Value = PM10Button.Checked;
+        //        sensorGridView.Rows[6].Cells[0].Value = PM25Button.Checked;
+        //    }
+
+        //}
+
+        //private void PM25Button_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (sensirionCheckBox.Checked)
+        //    {
+        //        sensorGridView.Rows[7].Cells[0].Value = PM10Button.Checked;
+        //        sensorGridView.Rows[6].Cells[0].Value = PM25Button.Checked;
+        //    }
+        //}
     }
 
 }

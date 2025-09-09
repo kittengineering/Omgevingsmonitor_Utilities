@@ -31,11 +31,31 @@ namespace Omgevingsmonitor_configurator
             gui = form;
         }
 
+        public static bool checkStm32Install()
+        {
+            Process flashSTM = new Process();
+            flashSTM.StartInfo.FileName = "cmd.exe";
+            flashSTM.StartInfo.Arguments = $"/c \"\"{ProgrammerPath}\\STM32_Programmer_CLI.exe\" -version\"";
+            flashSTM.StartInfo.RedirectStandardOutput = true;
+            flashSTM.StartInfo.UseShellExecute = false;
+            flashSTM.StartInfo.CreateNoWindow = true;
+
+            flashSTM.Start();
+            string output = flashSTM.StandardOutput.ReadToEnd();
+            flashSTM.WaitForExit();
+     
+            if (output.Contains("2.17.0") || output.Contains("2.18.0"))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static string flashStm32(string stmFile, string address, string port, string sn)
         {
-            string batchFilePath = @"STM32L072batch.bat";
-            string batchFilePathQuoted = "\"" + batchFilePath + "\"";
-            Console.WriteLine(batchFilePathQuoted);
+            //string batchFilePath = @"STM32L072batch.bat";
+            //string batchFilePathQuoted = "\"" + batchFilePath + "\"";
+            //Console.WriteLine(batchFilePathQuoted);
 
             string binPath = stmFile;
             string binPathQuoted = "\"" + binPath + "\"";
@@ -45,7 +65,7 @@ namespace Omgevingsmonitor_configurator
 
             Process flashSTM = new Process();
             flashSTM.StartInfo.FileName = "cmd.exe";
-            flashSTM.StartInfo.Arguments = $"/c \"{batchFilePathQuoted} {port} {sn} {binPathQuoted} {address}\"";
+            flashSTM.StartInfo.Arguments = $"/c \"\"{ProgrammerPath}\\STM32_Programmer_CLI.exe\" -c port={port} sn={sn} mode=HOTPLUG freq=4000 speed=Reliable -w {binPathQuoted} {address} -halt\"";
             flashSTM.StartInfo.RedirectStandardOutput = true;
             flashSTM.StartInfo.UseShellExecute = false;
             flashSTM.StartInfo.CreateNoWindow = true;
@@ -63,9 +83,9 @@ namespace Omgevingsmonitor_configurator
             usedProgressBar = pb;
             usedTextBox = tb;
             gui.flashProcessRunning++;
-            string batchFilePath = @"STM32L072batch.bat";
-            string batchFilePathQuoted = "\"" + batchFilePath + "\"";
-            Console.WriteLine(batchFilePathQuoted);
+            //string batchFilePath = @"STM32L072batch.bat";
+            //string batchFilePathQuoted = "\"" + batchFilePath + "\"";
+            //Console.WriteLine(batchFilePathQuoted);
 
             string binPath = stmFile;
             string binPathQuoted = "\"" + binPath + "\"";
@@ -75,7 +95,7 @@ namespace Omgevingsmonitor_configurator
 
             Process flashSTM = new Process();
             flashSTM.StartInfo.FileName = "cmd.exe";
-            flashSTM.StartInfo.Arguments = $"/c \"{batchFilePathQuoted} {port} {sn} {binPathQuoted} {address}\"";
+            flashSTM.StartInfo.Arguments = $"/c \"\"{ProgrammerPath}\\STM32_Programmer_CLI.exe\" -c port={port} sn={sn} mode=HOTPLUG freq=4000 speed=Reliable -w {binPathQuoted} {address} -halt\"";
             flashSTM.StartInfo.RedirectStandardOutput = true;
             flashSTM.StartInfo.UseShellExecute = false;
             flashSTM.StartInfo.CreateNoWindow = true;
@@ -94,9 +114,9 @@ namespace Omgevingsmonitor_configurator
             usedBarProgressBar = pb;
             usedTextBox = tb;
             gui.flashProcessRunning++;
-            string batchFilePath = @"STM32L072batch.bat";
-            string batchFilePathQuoted = "\"" + batchFilePath + "\"";
-            Console.WriteLine(batchFilePathQuoted);
+            //string batchFilePath = @"STM32L072batch.bat";
+            //string batchFilePathQuoted = "\"" + batchFilePath + "\"";
+            //Console.WriteLine(batchFilePathQuoted);
 
             string binPath = stmFile;
             string binPathQuoted = "\"" + binPath + "\"";
@@ -106,7 +126,8 @@ namespace Omgevingsmonitor_configurator
 
             Process flashSTM = new Process();
             flashSTM.StartInfo.FileName = "cmd.exe";
-            flashSTM.StartInfo.Arguments = $"/c \"{batchFilePathQuoted} {port} {sn} {binPathQuoted} {address}\"";
+            //flashSTM.StartInfo.Arguments = $"/c \"{batchFilePathQuoted} {port} {sn} {binPathQuoted} {address}\"";
+            flashSTM.StartInfo.Arguments = $"/c \"\"{ProgrammerPath}\\STM32_Programmer_CLI.exe\" -c port={port} sn={sn} mode=HOTPLUG freq=4000 speed=Reliable -w {binPathQuoted} {address} -halt\"";
             flashSTM.StartInfo.RedirectStandardOutput = true;
             flashSTM.StartInfo.UseShellExecute = false;
             flashSTM.StartInfo.CreateNoWindow = true;
@@ -123,8 +144,10 @@ namespace Omgevingsmonitor_configurator
             Console.WriteLine(e.Data);
             if (e.Data != null)
             {
-                gui.UpdateTextBox(usedTextBox, e.Data);
-                if (e.Data.Contains("File download complete"))
+                string line = General.NormalizeConsoleGlyphs(e.Data).Replace("\r", "");
+             
+                gui.UpdateTextBox(usedTextBox, line);
+                if (line.Contains("File download complete"))
                 {
                     gui.flashProcessRunning--;
                     //if (gui.flashProcessRunning == 0)
@@ -132,7 +155,7 @@ namespace Omgevingsmonitor_configurator
                         //General.messageBoxLed();
                     //}
                 }
-                else if (e.Data.Contains("Error:"))
+                else if (line.Contains("Error:"))
                 {
                     gui.flashProcessRunning--;
                     MessageBox.Show(e.Data, "STM programming error", MessageBoxButtons.OK ,MessageBoxIcon.Error);

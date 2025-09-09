@@ -57,22 +57,33 @@ namespace Omgevingsmonitor_configurator
             this.outputBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.WiFiBox = new System.Windows.Forms.GroupBox();
             this.WiFiConfigButton = new System.Windows.Forms.Button();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.SSIDLabel = new System.Windows.Forms.Label();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.SSIDBox = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.stmInterfaceBox = new System.Windows.Forms.ComboBox();
+            this.labelBlockedReason = new System.Windows.Forms.Label();
+            this.selectFileStmBox = new System.Windows.Forms.TextBox();
+            this.stmDeviceBox = new System.Windows.Forms.ComboBox();
+            this.openStmElfBtn = new System.Windows.Forms.Button();
+            this.stmFlashBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.WiFiBox.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loginToolStripMenuItem,
@@ -80,7 +91,7 @@ namespace Omgevingsmonitor_configurator
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1162, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(1467, 36);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -92,52 +103,53 @@ namespace Omgevingsmonitor_configurator
             this.toolStripSeparator1,
             this.createNewAccountToolStripMenuItem});
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(138, 28);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(178, 32);
             this.loginToolStripMenuItem.Text = "OpenSense Login";
             // 
             // loginAccountToolStripMenuItem
             // 
             this.loginAccountToolStripMenuItem.Name = "loginAccountToolStripMenuItem";
-            this.loginAccountToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
+            this.loginAccountToolStripMenuItem.Size = new System.Drawing.Size(275, 32);
             this.loginAccountToolStripMenuItem.Text = "Login";
             this.loginAccountToolStripMenuItem.Click += new System.EventHandler(this.loginAccountToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(272, 6);
             // 
             // createNewAccountToolStripMenuItem
             // 
             this.createNewAccountToolStripMenuItem.Name = "createNewAccountToolStripMenuItem";
-            this.createNewAccountToolStripMenuItem.Size = new System.Drawing.Size(227, 26);
+            this.createNewAccountToolStripMenuItem.Size = new System.Drawing.Size(275, 32);
             this.createNewAccountToolStripMenuItem.Text = "Create New Account";
             this.createNewAccountToolStripMenuItem.Click += new System.EventHandler(this.createNewAccountToolStripMenuItem_Click);
             // 
             // configPortBox
             // 
             this.configPortBox.BackColor = System.Drawing.Color.Red;
+            this.configPortBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.configPortBox.Name = "configPortBox";
-            this.configPortBox.Size = new System.Drawing.Size(121, 28);
+            this.configPortBox.Size = new System.Drawing.Size(550, 32);
             this.configPortBox.DropDown += new System.EventHandler(this.configPortBox_DropDown);
             this.configPortBox.SelectedIndexChanged += new System.EventHandler(this.configPortBox_SelectedIndexChanged);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 28);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(57, 32);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // addBoxBtn
             // 
             this.addBoxBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addBoxBtn.BackColor = System.Drawing.SystemColors.GrayText;
+            this.addBoxBtn.BackColor = System.Drawing.SystemColors.Control;
             this.addBoxBtn.Enabled = false;
             this.addBoxBtn.Location = new System.Drawing.Point(12, 366);
             this.addBoxBtn.Name = "addBoxBtn";
             this.addBoxBtn.Size = new System.Drawing.Size(582, 46);
-            this.addBoxBtn.TabIndex = 4;
+            this.addBoxBtn.TabIndex = 1;
             this.addBoxBtn.Text = "Add a omgevingsmonitor";
             this.addBoxBtn.UseVisualStyleBackColor = false;
             this.addBoxBtn.Click += new System.EventHandler(this.addBoxBtn_Click);
@@ -154,9 +166,9 @@ namespace Omgevingsmonitor_configurator
             this.SensorsColumn});
             this.userBoxesListView.FullRowSelect = true;
             this.userBoxesListView.HideSelection = false;
-            this.userBoxesListView.Location = new System.Drawing.Point(12, 39);
+            this.userBoxesListView.Location = new System.Drawing.Point(12, 42);
             this.userBoxesListView.Name = "userBoxesListView";
-            this.userBoxesListView.Size = new System.Drawing.Size(582, 325);
+            this.userBoxesListView.Size = new System.Drawing.Size(582, 322);
             this.userBoxesListView.TabIndex = 5;
             this.userBoxesListView.UseCompatibleStateImageBehavior = false;
             this.userBoxesListView.View = System.Windows.Forms.View.Details;
@@ -191,13 +203,13 @@ namespace Omgevingsmonitor_configurator
             // configBtn
             // 
             this.configBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.configBtn.BackColor = System.Drawing.SystemColors.GrayText;
+            this.configBtn.BackColor = System.Drawing.SystemColors.Control;
             this.configBtn.Enabled = false;
             this.configBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.configBtn.Location = new System.Drawing.Point(50, 664);
             this.configBtn.Name = "configBtn";
             this.configBtn.Size = new System.Drawing.Size(206, 45);
-            this.configBtn.TabIndex = 21;
+            this.configBtn.TabIndex = 2;
             this.configBtn.Text = "Configure gadget";
             this.configBtn.UseVisualStyleBackColor = false;
             this.configBtn.Click += new System.EventHandler(this.configBtn_Click);
@@ -252,7 +264,7 @@ namespace Omgevingsmonitor_configurator
             this.generalProgressBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 727);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1162, 44);
+            this.statusStrip1.Size = new System.Drawing.Size(1467, 44);
             this.statusStrip1.TabIndex = 27;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -275,13 +287,13 @@ namespace Omgevingsmonitor_configurator
             // deleteConfigBtn
             // 
             this.deleteConfigBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteConfigBtn.BackColor = System.Drawing.SystemColors.GrayText;
+            this.deleteConfigBtn.BackColor = System.Drawing.SystemColors.Control;
             this.deleteConfigBtn.Enabled = false;
             this.deleteConfigBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteConfigBtn.Location = new System.Drawing.Point(301, 664);
             this.deleteConfigBtn.Name = "deleteConfigBtn";
             this.deleteConfigBtn.Size = new System.Drawing.Size(206, 45);
-            this.deleteConfigBtn.TabIndex = 28;
+            this.deleteConfigBtn.TabIndex = 3;
             this.deleteConfigBtn.Text = "Delete Config";
             this.deleteConfigBtn.UseVisualStyleBackColor = false;
             this.deleteConfigBtn.Click += new System.EventHandler(this.deleteConfigBtn_Click);
@@ -294,11 +306,11 @@ namespace Omgevingsmonitor_configurator
             this.outputBox.BackColor = System.Drawing.SystemColors.WindowText;
             this.outputBox.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.outputBox.Location = new System.Drawing.Point(3, 359);
+            this.outputBox.Location = new System.Drawing.Point(3, 373);
             this.outputBox.Multiline = true;
             this.outputBox.Name = "outputBox";
             this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputBox.Size = new System.Drawing.Size(556, 321);
+            this.outputBox.Size = new System.Drawing.Size(861, 306);
             this.outputBox.TabIndex = 30;
             // 
             // tableLayoutPanel2
@@ -310,15 +322,14 @@ namespace Omgevingsmonitor_configurator
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.outputBox, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.WiFiBox, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(600, 39);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(600, 42);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(562, 703);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(867, 682);
             this.tableLayoutPanel2.TabIndex = 34;
             // 
             // pictureBox1
@@ -327,31 +338,49 @@ namespace Omgevingsmonitor_configurator
             this.pictureBox1.Image = global::Omgevingsmonitor_configurator.Properties.Resources.Omgevingsmonitor_in_Stedelijk_Landschap;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(556, 212);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(861, 202);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 35;
             this.pictureBox1.TabStop = false;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.WiFiBox, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 211);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(861, 156);
+            this.tableLayoutPanel1.TabIndex = 36;
+            // 
             // WiFiBox
             // 
+            this.WiFiBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.WiFiBox.Controls.Add(this.WiFiConfigButton);
             this.WiFiBox.Controls.Add(this.PasswordLabel);
             this.WiFiBox.Controls.Add(this.SSIDLabel);
             this.WiFiBox.Controls.Add(this.PasswordBox);
             this.WiFiBox.Controls.Add(this.SSIDBox);
-            this.WiFiBox.Location = new System.Drawing.Point(3, 221);
+            this.WiFiBox.Location = new System.Drawing.Point(3, 3);
             this.WiFiBox.Name = "WiFiBox";
-            this.WiFiBox.Size = new System.Drawing.Size(556, 132);
+            this.WiFiBox.Size = new System.Drawing.Size(424, 150);
             this.WiFiBox.TabIndex = 36;
             this.WiFiBox.TabStop = false;
             this.WiFiBox.Text = "Wi-Fi Config";
             // 
             // WiFiConfigButton
             // 
-            this.WiFiConfigButton.Location = new System.Drawing.Point(372, 56);
+            this.WiFiConfigButton.Location = new System.Drawing.Point(98, 77);
             this.WiFiConfigButton.Name = "WiFiConfigButton";
             this.WiFiConfigButton.Size = new System.Drawing.Size(132, 33);
-            this.WiFiConfigButton.TabIndex = 4;
+            this.WiFiConfigButton.TabIndex = 6;
             this.WiFiConfigButton.Text = "Set Wi-Fi";
             this.WiFiConfigButton.UseVisualStyleBackColor = true;
             this.WiFiConfigButton.Click += new System.EventHandler(this.WiFiConfigButton_Click);
@@ -359,43 +388,134 @@ namespace Omgevingsmonitor_configurator
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Location = new System.Drawing.Point(35, 82);
+            this.PasswordLabel.Location = new System.Drawing.Point(8, 49);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(67, 16);
+            this.PasswordLabel.Size = new System.Drawing.Size(69, 17);
             this.PasswordLabel.TabIndex = 3;
             this.PasswordLabel.Text = "Password";
             // 
             // SSIDLabel
             // 
             this.SSIDLabel.AutoSize = true;
-            this.SSIDLabel.Location = new System.Drawing.Point(35, 56);
+            this.SSIDLabel.Location = new System.Drawing.Point(8, 23);
             this.SSIDLabel.Name = "SSIDLabel";
-            this.SSIDLabel.Size = new System.Drawing.Size(38, 16);
+            this.SSIDLabel.Size = new System.Drawing.Size(39, 17);
             this.SSIDLabel.TabIndex = 2;
             this.SSIDLabel.Text = "SSID";
             // 
             // PasswordBox
             // 
+            this.PasswordBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordBox.HideSelection = false;
-            this.PasswordBox.Location = new System.Drawing.Point(125, 82);
+            this.PasswordBox.Location = new System.Drawing.Point(98, 49);
             this.PasswordBox.MaxLength = 64;
             this.PasswordBox.Name = "PasswordBox";
-            this.PasswordBox.Size = new System.Drawing.Size(191, 22);
-            this.PasswordBox.TabIndex = 1;
+            this.PasswordBox.Size = new System.Drawing.Size(320, 22);
+            this.PasswordBox.TabIndex = 5;
             // 
             // SSIDBox
             // 
-            this.SSIDBox.Location = new System.Drawing.Point(125, 54);
+            this.SSIDBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SSIDBox.Location = new System.Drawing.Point(98, 21);
             this.SSIDBox.MaxLength = 32;
             this.SSIDBox.Name = "SSIDBox";
-            this.SSIDBox.Size = new System.Drawing.Size(191, 22);
-            this.SSIDBox.TabIndex = 0;
+            this.SSIDBox.Size = new System.Drawing.Size(320, 22);
+            this.SSIDBox.TabIndex = 4;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.stmInterfaceBox);
+            this.groupBox2.Controls.Add(this.selectFileStmBox);
+            this.groupBox2.Controls.Add(this.stmDeviceBox);
+            this.groupBox2.Controls.Add(this.openStmElfBtn);
+            this.groupBox2.Controls.Add(this.stmFlashBtn);
+            this.groupBox2.Controls.Add(this.labelBlockedReason);
+            this.groupBox2.Location = new System.Drawing.Point(433, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(425, 150);
+            this.groupBox2.TabIndex = 37;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "STM32";
+            // 
+            // stmInterfaceBox
+            // 
+            this.stmInterfaceBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stmInterfaceBox.FormattingEnabled = true;
+            this.stmInterfaceBox.Items.AddRange(new object[] {
+            "USB (DFU)",
+            "ST-Link"});
+            this.stmInterfaceBox.Location = new System.Drawing.Point(6, 21);
+            this.stmInterfaceBox.Name = "stmInterfaceBox";
+            this.stmInterfaceBox.Size = new System.Drawing.Size(413, 24);
+            this.stmInterfaceBox.TabIndex = 7;
+            this.stmInterfaceBox.Text = "USB (DFU)";
+            // 
+            // labelBlockedReason
+            // 
+            this.labelBlockedReason.AutoSize = true;
+            this.labelBlockedReason.Location = new System.Drawing.Point(6, 0);
+            this.labelBlockedReason.Margin = new System.Windows.Forms.Padding(3);
+            this.labelBlockedReason.Name = "labelBlockedReason";
+            this.labelBlockedReason.Size = new System.Drawing.Size(46, 17);
+            this.labelBlockedReason.TabIndex = 0;
+            this.labelBlockedReason.Text = "label1";
+            // 
+            // selectFileStmBox
+            // 
+            this.selectFileStmBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.selectFileStmBox.Enabled = false;
+            this.selectFileStmBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectFileStmBox.Location = new System.Drawing.Point(91, 81);
+            this.selectFileStmBox.Name = "selectFileStmBox";
+            this.selectFileStmBox.Size = new System.Drawing.Size(328, 30);
+            this.selectFileStmBox.TabIndex = 30;
+            // 
+            // stmDeviceBox
+            // 
+            this.stmDeviceBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stmDeviceBox.FormattingEnabled = true;
+            this.stmDeviceBox.Location = new System.Drawing.Point(6, 51);
+            this.stmDeviceBox.Name = "stmDeviceBox";
+            this.stmDeviceBox.Size = new System.Drawing.Size(413, 24);
+            this.stmDeviceBox.TabIndex = 8;
+            this.stmDeviceBox.DropDown += new System.EventHandler(this.stmDeviceBox_DropDown);
+            // 
+            // openStmElfBtn
+            // 
+            this.openStmElfBtn.Location = new System.Drawing.Point(6, 81);
+            this.openStmElfBtn.Name = "openStmElfBtn";
+            this.openStmElfBtn.Size = new System.Drawing.Size(79, 30);
+            this.openStmElfBtn.TabIndex = 9;
+            this.openStmElfBtn.Text = "Open Elf";
+            this.openStmElfBtn.UseVisualStyleBackColor = true;
+            this.openStmElfBtn.Click += new System.EventHandler(this.openStmElfBtn_Click);
+            // 
+            // stmFlashBtn
+            // 
+            this.stmFlashBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stmFlashBtn.Location = new System.Drawing.Point(6, 117);
+            this.stmFlashBtn.Name = "stmFlashBtn";
+            this.stmFlashBtn.Size = new System.Drawing.Size(413, 27);
+            this.stmFlashBtn.TabIndex = 10;
+            this.stmFlashBtn.Text = "Flash";
+            this.stmFlashBtn.UseVisualStyleBackColor = true;
+            this.stmFlashBtn.Click += new System.EventHandler(this.stmFlashBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 771);
+            this.ClientSize = new System.Drawing.Size(1467, 771);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.deleteConfigBtn);
             this.Controls.Add(this.statusStrip1);
@@ -419,8 +539,11 @@ namespace Omgevingsmonitor_configurator
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.WiFiBox.ResumeLayout(false);
             this.WiFiBox.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,6 +582,14 @@ namespace Omgevingsmonitor_configurator
         private System.Windows.Forms.Label SSIDLabel;
         private System.Windows.Forms.Button WiFiConfigButton;
         private System.Windows.Forms.TextBox PasswordBox;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox stmInterfaceBox;
+        private System.Windows.Forms.TextBox selectFileStmBox;
+        private System.Windows.Forms.ComboBox stmDeviceBox;
+        private System.Windows.Forms.Button openStmElfBtn;
+        private System.Windows.Forms.Button stmFlashBtn;
+        private System.Windows.Forms.Label labelBlockedReason;
     }
 }
 

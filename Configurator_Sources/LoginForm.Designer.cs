@@ -60,7 +60,7 @@
             this.label3.Location = new System.Drawing.Point(12, 53);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 16);
+            this.label3.Size = new System.Drawing.Size(69, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "Password";
             // 
@@ -70,7 +70,7 @@
             this.label2.Location = new System.Drawing.Point(12, 25);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 16);
+            this.label2.Size = new System.Drawing.Size(42, 17);
             this.label2.TabIndex = 5;
             this.label2.Text = "Email";
             // 
@@ -80,7 +80,7 @@
             this.loginBtn.Margin = new System.Windows.Forms.Padding(4);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(347, 28);
-            this.loginBtn.TabIndex = 4;
+            this.loginBtn.TabIndex = 3;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
@@ -111,7 +111,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginForm";
-            this.Text = "Login OpenSense";
+            this.Text = "Login OpenSenseMap";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
