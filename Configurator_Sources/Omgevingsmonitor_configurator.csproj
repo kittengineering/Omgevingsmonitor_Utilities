@@ -35,6 +35,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -216,7 +222,6 @@
     <None Include="Resources\Omgevingsmonitor.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\kratos gif.gif" />
     <Content Include="Resources\Omgevingsmonitor in Stedelijk Landschap.png" />
     <Content Include="Resources\Screenshot 2025-05-19 143331.png" />
   </ItemGroup>
